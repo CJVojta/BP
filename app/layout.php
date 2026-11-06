@@ -2,15 +2,15 @@
 function page_header(string $title,?array $u,string $page): void { ?>
 <!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=e($title)?> | Forma Fitness</title><link rel="stylesheet" href="assets/style.css"><script src="assets/app.js" defer></script></head><body>
 <a class="skip" href="#content">Přejít na obsah</a>
-<header class="topbar"><div class="container navigation"><a href="index.php" class="brand"><span class="brand-icon">F</span> FORMA<span class="brand-small">FITNESS</span></a><nav aria-label="Hlavní navigace">
+<header class="topbar"><div class="container navigation"><a href="index.php" class="brand"><span class="brand-icon">F</span> FORMA<span class="brand-small">FITNESS</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Otevřít navigaci</span></button><nav id="main-nav" aria-label="Hlavní navigace">
 <?php foreach(['home'=>'Úvod','schedule'=>'Rozvrh','trainers'=>'Trenéři'] as $p=>$label): ?><a class="<?=$page===$p?'selected':''?>" href="index.php?page=<?=$p?>"><?=$label?></a><?php endforeach ?>
-<?php if($u): ?><a href="index.php?page=reservations" class="<?=$page==='reservations'?'selected':''?>">Moje rezervace</a><a href="index.php?page=activity">Moje aktivita</a><?php if($u['role']==='admin'): ?><a href="index.php?page=admin" class="admin-link">Administrace</a><?php endif ?><a href="index.php?page=profile"><?=e($u['name'])?></a><form method="post" class="inline"><?php token() ?><input type="hidden" name="action" value="logout"><button class="link-button">Odhlásit</button></form>
+<?php if($u): ?><a href="index.php?page=reservations" class="<?=$page==='reservations'?'selected':''?>">Moje rezervace</a><a href="index.php?page=activity" class="<?=$page==='activity'?'selected':''?>">Moje aktivita</a><?php if($u['role']==='admin'): ?><a href="index.php?page=admin" class="admin-link">Administrace</a><?php endif ?><a href="index.php?page=profile"><?=e($u['name'])?></a><form method="post" class="inline"><?php token() ?><input type="hidden" name="action" value="logout"><button class="link-button">Odhlásit</button></form>
 <?php else: ?><a href="index.php?page=login">Přihlášení</a><a class="button small" href="index.php?page=register">Vytvořit účet</a><?php endif ?></nav></div></header>
 <main id="content" class="container">
 <?php if(isset($_SESSION['flash'])): $f=$_SESSION['flash']; unset($_SESSION['flash']); ?><div class="notice <?=e($f['type'])?>" role="status"><?=e($f['text'])?></div><?php endif ?>
 <?php }
 function page_footer(): void { ?>
-</main><footer class="container footer"><span>FORMA FITNESS · Rezervační systém</span><span>Školní projekt · Vojtěch Nováček</span></footer></body></html>
+</main><footer class="container footer"><div><strong>FORMA FITNESS</strong><br><span>Prostor pro pohyb, který je váš.</span></div><div class="footer-links"><a href="index.php?page=schedule">Rozvrh</a><a href="index.php?page=trainers">Trenéři</a><a href="index.php?page=login">Můj účet</a></div><span>Školní projekt · Vojtěch Nováček</span></footer></body></html>
 <?php }
 function heading(string $kicker,string $title,string $intro=''): void { ?><div class="page-heading"><span class="eyebrow"><?=e($kicker)?></span><h1><?=e($title)?></h1><?php if($intro): ?><p class="muted"><?=e($intro)?></p><?php endif ?></div><?php }
 function field(string $name,string $label,string $type='text',$value='',bool $required=true,string $extra=''): void { ?><label><?=e($label)?><input name="<?=e($name)?>" type="<?=e($type)?>" value="<?=e($value)?>" <?=$required?'required':''?> <?=$extra?>></label><?php }
