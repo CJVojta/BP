@@ -1,6 +1,6 @@
 <?php
 function page_header(string $title,?array $u,string $page): void { ?>
-<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=e($title)?> | Forma Fitness</title><link rel="stylesheet" href="assets/style.css"><script src="assets/app.js" defer></script></head><body>
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=e($title)?> | Forma Fitness</title><link rel="stylesheet" href="assets/style.css?v=<?=e((string)@sha1_file(__DIR__.'/../assets/style.css'))?>"><script src="assets/app.js?v=<?=e((string)@sha1_file(__DIR__.'/../assets/app.js'))?>" defer></script></head><body>
 <a class="skip" href="#content">Přejít na obsah</a>
 <header class="topbar"><div class="container navigation"><a href="index.php" class="brand"><span class="brand-icon">F</span> FORMA<span class="brand-small">FITNESS</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Otevřít navigaci</span></button><nav id="main-nav" aria-label="Hlavní navigace">
 <?php foreach(['home'=>'Úvod','schedule'=>'Rozvrh','trainers'=>'Trenéři'] as $p=>$label): ?><a class="<?=$page===$p?'selected':''?>" href="index.php?page=<?=$p?>"><?=$label?></a><?php endforeach ?>
